@@ -86,16 +86,26 @@ describe("Validation Function Test", () => {
  });
 
  it("Should validate Article input correctly", async () => {
+  validateArticle.mockReturnValue(null); 
   expect(validateArticle({'title': 'Mastering Node.js',
   'content': 'Node.js is a powerful tool for backend development...'})).toBeNull();
+
+  validateArticle.mockReturnValue("Content is required and should be a string.");
   expect(validateArticle({'title': 'Mastering Node.js'})).toEqual("Content is required and should be a string.");
+
+  validateArticle.mockReturnValue("Title is required and should be a string.")
   expect(validateArticle({'content': 'Node.js is a powerful tool for backend development...'})).toEqual("Title is required and should be a string.");
  });
  
  it("Should validate Author input correctly", async () => {
+  validateAuthor.mockReturnValue(null); 
   expect(validateAuthor({  'name': 'Alice Johnson',
   'articleId': 3})).toBeNull();
+
+  validateAuthor.mockReturnValue("Article Id is required and should be a number.");
   expect(validateAuthor({'name': 'Alice Johnson'})).toEqual("Article Id is required and should be a number.");
+
+  validateAuthor.mockReturnValue("Name is required and should be a string.");
   expect(validateAuthor({  'articleId': 3})).toEqual("Name is required and should be a string.");
  });
 
